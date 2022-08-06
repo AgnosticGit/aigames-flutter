@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-
 import 'axon_painter.dart';
 
 class Axon extends StatelessWidget {
@@ -12,6 +9,7 @@ class Axon extends StatelessWidget {
     required this.size,
     this.color = Colors.black,
     this.strokeWidth = 5.0,
+    this.weight,
   }) : super(key: key);
 
   final Size size;
@@ -23,16 +21,47 @@ class Axon extends StatelessWidget {
 
   final double strokeWidth;
 
+  final double? weight;
+
+  static const double _offsetOfWeightDy = 30.0;
+
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
-      size: size,
-      foregroundPainter: AxonPainter(
-        start: start,
-        end: end,
-        color: color,
-        strokeWidth: strokeWidth,
-      ),
+    return Stack(
+      children: [
+        CustomPaint(
+          size: size,
+          painter: AxonPainter(
+            start: start,
+            end: end,
+            color: color,
+            strokeWidth: strokeWidth,
+          ),
+        ),
+        _buildWeight(),
+      ],
     );
+  }
+
+  Widget _buildWeight() {
+    if (weight == null) return const SizedBox();
+
+    return Positioned(
+      left: _calculateDx(),
+      top: _calculateDy(),
+      child: Text(weight.toString()),
+    );
+  }
+
+  double _calculateDx() {
+    return (end - start).dx / 2 + start.dx;
+  }
+
+  double _calculateDy() {
+    if (end.dy > start.dy) {
+      return (end - start).dy / 2 + start.dy - _offsetOfWeightDy;
+    }
+
+    return (start - end).dy / 2 + end.dy - _offsetOfWeightDy;
   }
 }

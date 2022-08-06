@@ -24,6 +24,18 @@ class PerceptronPage extends StatelessWidget {
         height: double.infinity,
         child: Stack(
           children: [
+            Axon(
+              size: const Size.square(double.infinity),
+              start: input1Offset.rightCenter(),
+              end: outputOffset.leftCenter(),
+              weight: 10,
+            ),
+            Axon(
+              size: const Size.square(double.infinity),
+              start: input2Offset.rightCenter(),
+              end: outputOffset.leftCenter(),
+              weight: 30,
+            ),
             const OffsetPositioned(
               offset: input1Offset,
               child: Neuron(diameter: neuronDiameter),
@@ -35,16 +47,6 @@ class PerceptronPage extends StatelessWidget {
             OffsetPositioned(
               offset: outputOffset,
               child: const Neuron(diameter: neuronDiameter),
-            ),
-            Axon(
-              size: const Size.square(double.infinity),
-              start: input1Offset.rightCenter(),
-              end: outputOffset.leftCenter(),
-            ),
-            Axon(
-              size: const Size.square(double.infinity),
-              start: input2Offset.rightCenter(),
-              end: outputOffset.leftCenter(),
             ),
           ],
         ),
