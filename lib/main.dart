@@ -1,6 +1,4 @@
 import 'package:aigames_flutter/core/style/texts.dart';
-import 'package:aigames_flutter/pages/main_page.dart';
-import 'package:aigames_flutter/pages/perceptron_page.dart';
 import 'package:flutter/material.dart';
 
 import 'core/navigation/app_router.gr.dart';
