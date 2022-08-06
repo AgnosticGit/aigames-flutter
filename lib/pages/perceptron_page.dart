@@ -1,7 +1,8 @@
 import 'package:aigames_flutter/core/style/texts.dart';
 import 'package:aigames_flutter/core/utils/neuron_offset.dart';
 import 'package:aigames_flutter/core/widgets/axon/axon.dart';
-import 'package:aigames_flutter/core/widgets/neuron.dart';
+import 'package:aigames_flutter/core/widgets/neurons/neuron_card.dart';
+import 'package:aigames_flutter/core/widgets/neurons/switch_input_neuron.dart';
 import 'package:aigames_flutter/core/widgets/offset_positioned.dart';
 import 'package:flutter/material.dart';
 
@@ -38,15 +39,18 @@ class PerceptronPage extends StatelessWidget {
             ),
             const OffsetPositioned(
               offset: input1Offset,
-              child: Neuron(diameter: neuronDiameter),
+              child: SwitchInputNeuron(diameter: neuronDiameter),
             ),
             const OffsetPositioned(
               offset: input2Offset,
-              child: Neuron(diameter: neuronDiameter),
+              child: SwitchInputNeuron(diameter: neuronDiameter),
             ),
             OffsetPositioned(
               offset: outputOffset,
-              child: const Neuron(diameter: neuronDiameter),
+              child: const NeuronCard(
+                diameter: neuronDiameter,
+                child:  SizedBox(),
+              ),
             ),
           ],
         ),

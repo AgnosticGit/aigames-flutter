@@ -23,7 +23,8 @@ class Axon extends StatelessWidget {
 
   final double? weight;
 
-  static const double _offsetOfWeightDy = 30.0;
+  static const double _offsetOfWeightDy = 0.0;
+  static const double _offsetOfWeightDx = 30.0;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +55,7 @@ class Axon extends StatelessWidget {
   }
 
   double _calculateDx() {
-    return (end - start).dx / 2 + start.dx;
+    return (end - start).dx / 2 + start.dx ;
   }
 
   double _calculateDy() {

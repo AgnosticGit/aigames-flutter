@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class Neuron extends StatelessWidget {
-  const Neuron({
+class NeuronCard extends StatelessWidget {
+  const NeuronCard({
     Key? key,
+    required this.child,
     this.diameter = 100.0,
   }) : super(key: key);
 
   final double diameter;
+
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -27,17 +30,9 @@ class Neuron extends StatelessWidget {
           ),
         ],
       ),
-      child: TextField(
-        keyboardType: TextInputType.number,
-        inputFormatters: <TextInputFormatter>[
-          FilteringTextInputFormatter.allow(RegExp(r'[0-1]')),
-          LengthLimitingTextInputFormatter(1),
-        ],
-        textAlign: TextAlign.center,
-        decoration: const InputDecoration(
-          border: InputBorder.none,
-          hintText: 'From 0 to 1',
-        ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(diameter),
+        child: child,
       ),
     );
   }
