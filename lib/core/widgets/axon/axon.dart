@@ -23,9 +23,6 @@ class Axon extends StatelessWidget {
 
   final double? weight;
 
-  static const double _offsetOfWeightDy = 0.0;
-  static const double _offsetOfWeightDx = 30.0;
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -50,19 +47,38 @@ class Axon extends StatelessWidget {
     return Positioned(
       left: _calculateDx(),
       top: _calculateDy(),
-      child: Text(weight.toString()),
+      child: Container(
+        padding: const EdgeInsets.all(5.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8.0),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 2,
+              blurRadius: 2,
+              offset: const Offset(0, 3),
+            ),
+          ],
+        ),
+        child: Text(weight.toString()),
+      ),
     );
   }
 
   double _calculateDx() {
-    return (end - start).dx / 2 + start.dx ;
+    final axonCenterDx = start.dx + (end - start).dx / 2;
+
+    return axonCenterDx - 20;
   }
 
   double _calculateDy() {
     if (end.dy > start.dy) {
-      return (end - start).dy / 2 + start.dy - _offsetOfWeightDy;
+      final axonCenterDy = start.dy + (end - start).dy / 2;
+      return axonCenterDy-15;
     }
 
-    return (start - end).dy / 2 + end.dy - _offsetOfWeightDy;
+    final axonCenterDy = end.dy + (start - end).dy / 2;
+    return axonCenterDy-15;
   }
 }
