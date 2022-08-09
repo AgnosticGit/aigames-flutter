@@ -9,6 +9,8 @@ part of 'perceptron_model.dart';
 abstract class _$PerceptronModelCWProxy {
   PerceptronModel epoches(int epoches);
 
+  PerceptronModel id(int id);
+
   PerceptronModel input1(int? input1);
 
   PerceptronModel input2(int? input2);
@@ -27,6 +29,7 @@ abstract class _$PerceptronModelCWProxy {
   /// ````
   PerceptronModel call({
     int? epoches,
+    int? id,
     int? input1,
     int? input2,
     double? learningRate,
@@ -43,6 +46,9 @@ class _$PerceptronModelCWProxyImpl implements _$PerceptronModelCWProxy {
 
   @override
   PerceptronModel epoches(int epoches) => this(epoches: epoches);
+
+  @override
+  PerceptronModel id(int id) => this(id: id);
 
   @override
   PerceptronModel input1(int? input1) => this(input1: input1);
@@ -70,6 +76,7 @@ class _$PerceptronModelCWProxyImpl implements _$PerceptronModelCWProxy {
   /// ````
   PerceptronModel call({
     Object? epoches = const $CopyWithPlaceholder(),
+    Object? id = const $CopyWithPlaceholder(),
     Object? input1 = const $CopyWithPlaceholder(),
     Object? input2 = const $CopyWithPlaceholder(),
     Object? learningRate = const $CopyWithPlaceholder(),
@@ -81,6 +88,10 @@ class _$PerceptronModelCWProxyImpl implements _$PerceptronModelCWProxy {
           ? _value.epoches
           // ignore: cast_nullable_to_non_nullable
           : epoches as int,
+      id: id == const $CopyWithPlaceholder() || id == null
+          ? _value.id
+          // ignore: cast_nullable_to_non_nullable
+          : id as int,
       input1: input1 == const $CopyWithPlaceholder()
           ? _value.input1
           // ignore: cast_nullable_to_non_nullable
@@ -118,20 +129,22 @@ extension $PerceptronModelCopyWith on PerceptronModel {
 
 PerceptronModel _$PerceptronModelFromJson(Map<String, dynamic> json) =>
     PerceptronModel(
+      id: json['id'] as int,
       w0: (json['w0'] as num).toDouble(),
       w1: (json['w1'] as num).toDouble(),
       epoches: json['epoches'] as int,
-      learningRate: (json['learningRate'] as num).toDouble(),
+      learningRate: (json['learning_rate'] as num).toDouble(),
       input1: json['input1'] as int?,
       input2: json['input2'] as int?,
     );
 
 Map<String, dynamic> _$PerceptronModelToJson(PerceptronModel instance) =>
     <String, dynamic>{
+      'id': instance.id,
       'w0': instance.w0,
       'w1': instance.w1,
       'input1': instance.input1,
       'input2': instance.input2,
       'epoches': instance.epoches,
-      'learningRate': instance.learningRate,
+      'learning_rate': instance.learningRate,
     };

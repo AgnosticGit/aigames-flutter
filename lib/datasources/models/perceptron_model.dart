@@ -7,6 +7,7 @@ part 'perceptron_model.g.dart';
 @CopyWith()
 class PerceptronModel {
   PerceptronModel({
+    required this.id,
     required this.w0,
     required this.w1,
     required this.epoches,
@@ -15,6 +16,8 @@ class PerceptronModel {
     this.input2,
   });
 
+  final int id;
+
   final double w0;
   final double w1;
 
@@ -22,8 +25,15 @@ class PerceptronModel {
   final int? input2;
 
   final int epoches;
+
+  @JsonKey(name: 'learning_rate')
   final double learningRate;
 
   factory PerceptronModel.fromJson(Map<String, dynamic> json) =>
       _$PerceptronModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$PerceptronModelToJson(this);
+
+  @override
+  String toString() => toJson().toString();
 }

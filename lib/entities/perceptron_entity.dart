@@ -10,6 +10,7 @@ class PerceptronEntity extends Entity {
   PerceptronDatasource? datasource;
 
   PerceptronModel perceptron = PerceptronModel(
+    id: 0,
     w0: 0,
     w1: 0,
     epoches: 1,

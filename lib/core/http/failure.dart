@@ -8,4 +8,15 @@ abstract class Failure {
 
   final String message;
   final int? code;
+
+  @override
+  String toString() {
+    final obj = {'message': message};
+
+    if (code != null) {
+      obj['code'] = code.toString();
+    }
+
+    return obj.toString();
+  }
 }
