@@ -1,5 +1,9 @@
+import 'package:aigames_flutter/core/di/di.dart';
+import 'package:aigames_flutter/core/style/texts.dart';
+import 'package:aigames_flutter/entities/perceptron_entity.dart';
 import 'package:flutter/material.dart';
 
+import '../core/state_manager/app_builder.dart';
 import '../core/utils/neuron_offset.dart';
 import '../core/widgets/axon/axon.dart';
 import '../core/widgets/neurons/neuron_card.dart';
@@ -19,42 +23,57 @@ class PerceptronView extends StatelessWidget {
     final outputOffset =
         NeuronOffset(500, centerBetweenInputs, _neuronDiameter);
 
-    return SizedBox(
-      width: 630.0,
-      height: 430.0,
-      child: Stack(
-        children: [
-          Axon(
-            size: const Size.square(double.infinity),
-            start: input1Offset.rightCenter(),
-            end: outputOffset.leftCenter(),
-            weight: 10,
+    return AppBuilder<PerceptronEntity>(
+      observable: Di.perceptron,
+      builder: (entity) {
+        return SizedBox(
+          width: 630.0,
+          height: 430.0,
+          child: Stack(
+            children: [
+              Axon(
+                size: const Size.square(double.infinity),
+                start: input1Offset.rightCenter(),
+                end: outputOffset.leftCenter(),
+                weight: entity.perceptron.w0,
+              ),
+              Axon(
+                size: const Size.square(double.infinity),
+                start: input2Offset.rightCenter(),
+                end: outputOffset.leftCenter(),
+                weight: entity.perceptron.w1,
+              ),
+              OffsetPositioned(
+                offset: input1Offset,
+                child: SwitchInputNeuron(
+                  diameter: _neuronDiameter,
+                  value:
+                      double.tryParse(entity.perceptron.input1.toString()) ?? 0,
+                ),
+              ),
+              OffsetPositioned(
+                offset: input2Offset,
+                child: SwitchInputNeuron(
+                  diameter: _neuronDiameter,
+                  value:
+                      double.tryParse(entity.perceptron.input2.toString()) ?? 0,
+                ),
+              ),
+              OffsetPositioned(
+                offset: outputOffset,
+                child: NeuronCard(
+                  diameter: _neuronDiameter,
+                  child: Text(
+                    entity.perceptron.output == null
+                        ? Texts.tryOrLearn
+                        : entity.perceptron.output.toString(),
+                  ),
+                ),
+              ),
+            ],
           ),
-          Axon(
-            size: const Size.square(double.infinity),
-            start: input2Offset.rightCenter(),
-            end: outputOffset.leftCenter(),
-            weight: 30,
-          ),
-          const OffsetPositioned(
-            offset: input1Offset,
-            child: SwitchInputNeuron(
-              diameter: _neuronDiameter,
-            ),
-          ),
-          const OffsetPositioned(
-            offset: input2Offset,
-            child: SwitchInputNeuron(diameter: _neuronDiameter),
-          ),
-          OffsetPositioned(
-            offset: outputOffset,
-            child: const NeuronCard(
-              diameter: _neuronDiameter,
-              child: SizedBox(),
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

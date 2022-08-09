@@ -9,13 +9,8 @@ class PerceptronEntity extends Entity {
 
   PerceptronDatasource? datasource;
 
-  PerceptronModel perceptron = PerceptronModel(
-    id: 0,
-    w0: 0,
-    w1: 0,
-    epoches: 1,
-    learningRate: 0.1,
-  );
+  PerceptronModel perceptron =
+      PerceptronModel(id: 0, w0: 0.0, w1: 0.0, epoches: 1, learningRate: 0.1);
 
   Future<void> getPerceptron() async {
     if (datasource != null) {
@@ -29,5 +24,25 @@ class PerceptronEntity extends Entity {
         setFailure(failure);
       }
     }
+  }
+
+  void setLearningRate(double newRate) {
+    perceptron = perceptron.copyWith(learningRate: newRate);
+    update();
+  }
+
+  void setEpoches(int newEpoches) {
+    perceptron = perceptron.copyWith(epoches: newEpoches);
+    update();
+  }
+
+  void setInput1(int newInput1) {
+    perceptron = perceptron.copyWith(input1: newInput1);
+    update();
+  }
+
+  void setInput2(int newInput2) {
+    perceptron = perceptron.copyWith(input2: newInput2);
+    update();
   }
 }

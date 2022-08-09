@@ -14,6 +14,7 @@ class PerceptronModel {
     required this.learningRate,
     this.input1,
     this.input2,
+    this.output,
   });
 
   final int id;
@@ -28,6 +29,8 @@ class PerceptronModel {
 
   @JsonKey(name: 'learning_rate')
   final double learningRate;
+
+  final int? output;
 
   factory PerceptronModel.fromJson(Map<String, dynamic> json) =>
       _$PerceptronModelFromJson(json);

@@ -7,8 +7,8 @@ class Axon extends StatelessWidget {
     required this.start,
     required this.end,
     required this.size,
-    this.color = Colors.black,
-    this.strokeWidth = 5.0,
+    this.color = Colors.grey,
+    this.strokeWidth = 4.0,
     this.weight,
   }) : super(key: key);
 

@@ -17,6 +17,8 @@ abstract class _$PerceptronModelCWProxy {
 
   PerceptronModel learningRate(double learningRate);
 
+  PerceptronModel output(int? output);
+
   PerceptronModel w0(double w0);
 
   PerceptronModel w1(double w1);
@@ -33,6 +35,7 @@ abstract class _$PerceptronModelCWProxy {
     int? input1,
     int? input2,
     double? learningRate,
+    int? output,
     double? w0,
     double? w1,
   });
@@ -61,6 +64,9 @@ class _$PerceptronModelCWProxyImpl implements _$PerceptronModelCWProxy {
       this(learningRate: learningRate);
 
   @override
+  PerceptronModel output(int? output) => this(output: output);
+
+  @override
   PerceptronModel w0(double w0) => this(w0: w0);
 
   @override
@@ -80,6 +86,7 @@ class _$PerceptronModelCWProxyImpl implements _$PerceptronModelCWProxy {
     Object? input1 = const $CopyWithPlaceholder(),
     Object? input2 = const $CopyWithPlaceholder(),
     Object? learningRate = const $CopyWithPlaceholder(),
+    Object? output = const $CopyWithPlaceholder(),
     Object? w0 = const $CopyWithPlaceholder(),
     Object? w1 = const $CopyWithPlaceholder(),
   }) {
@@ -105,6 +112,10 @@ class _$PerceptronModelCWProxyImpl implements _$PerceptronModelCWProxy {
               ? _value.learningRate
               // ignore: cast_nullable_to_non_nullable
               : learningRate as double,
+      output: output == const $CopyWithPlaceholder()
+          ? _value.output
+          // ignore: cast_nullable_to_non_nullable
+          : output as int?,
       w0: w0 == const $CopyWithPlaceholder() || w0 == null
           ? _value.w0
           // ignore: cast_nullable_to_non_nullable
@@ -136,6 +147,7 @@ PerceptronModel _$PerceptronModelFromJson(Map<String, dynamic> json) =>
       learningRate: (json['learning_rate'] as num).toDouble(),
       input1: json['input1'] as int?,
       input2: json['input2'] as int?,
+      output: json['output'] as int?,
     );
 
 Map<String, dynamic> _$PerceptronModelToJson(PerceptronModel instance) =>
@@ -147,4 +159,5 @@ Map<String, dynamic> _$PerceptronModelToJson(PerceptronModel instance) =>
       'input2': instance.input2,
       'epoches': instance.epoches,
       'learning_rate': instance.learningRate,
+      'output': instance.output,
     };
