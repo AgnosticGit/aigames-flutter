@@ -9,12 +9,62 @@ class PerceptronEntity extends Entity {
 
   PerceptronDatasource? datasource;
 
-  PerceptronModel perceptron =
-      PerceptronModel(id: 0, w0: 0.0, w1: 0.0, epoches: 1, learningRate: 0.1);
+  PerceptronModel perceptron = PerceptronModel(
+    id: 0,
+    w0: 0.0,
+    w1: 0.0,
+    epoches: 1,
+    learningRate: 0.1,
+    input1: 0,
+    input2: 0,
+  );
 
   Future<void> getPerceptron() async {
     if (datasource != null) {
       final leftOrRight = await datasource!.getPerceptron();
+
+      if (leftOrRight.isRight()) {
+        perceptron = leftOrRight.getRight().toNullable()!;
+        update();
+      } else {
+        final failure = leftOrRight.getLeft().toNullable();
+        setFailure(failure);
+      }
+    }
+  }
+
+  Future<void> tryPerceptron() async {
+    if (datasource != null) {
+      final leftOrRight = await datasource!.tryPerceptron(perceptron);
+
+      if (leftOrRight.isRight()) {
+        perceptron = leftOrRight.getRight().toNullable()!;
+        update();
+      } else {
+        final failure = leftOrRight.getLeft().toNullable();
+        setFailure(failure);
+      }
+    }
+  }
+
+  Future<void> trainPerceptron() async {
+    if (datasource != null) {
+      final leftOrRight = await datasource!.trainPerceptron(perceptron);
+
+      if (leftOrRight.isRight()) {
+        perceptron = leftOrRight.getRight().toNullable()!;
+        print(perceptron);
+        update();
+      } else {
+        final failure = leftOrRight.getLeft().toNullable();
+        setFailure(failure);
+      }
+    }
+  }
+
+  Future<void> resetPerceptron() async {
+    if (datasource != null) {
+      final leftOrRight = await datasource!.resetPerceptron();
 
       if (leftOrRight.isRight()) {
         perceptron = leftOrRight.getRight().toNullable()!;

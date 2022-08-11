@@ -4,4 +4,14 @@ import 'package:fpdart/fpdart.dart';
 
 abstract class PerceptronDatasource {
   Future<Either<Failure, PerceptronModel>> getPerceptron();
+
+  Future<Either<Failure, PerceptronModel>> tryPerceptron(
+    PerceptronModel perceptronModel,
+  );
+
+  Future<Either<Failure, PerceptronModel>> trainPerceptron(
+    PerceptronModel perceptronModel,
+  );
+
+  Future<Either<Failure, PerceptronModel>> resetPerceptron();
 }

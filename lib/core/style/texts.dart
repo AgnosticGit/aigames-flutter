@@ -6,5 +6,7 @@ class Texts {
   static const learningRate = 'Learning rate';
   static const epoches = 'Epoches';
   static const tryRequest = 'Try';
-  static const tryOrLearn = 'Try or Learn';
+  static const tryOrTrain = 'Try or Train';
+  static const train = 'Train';
+  static const reset = 'Reset';
 }

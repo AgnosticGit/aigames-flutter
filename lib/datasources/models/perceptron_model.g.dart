@@ -11,9 +11,9 @@ abstract class _$PerceptronModelCWProxy {
 
   PerceptronModel id(int id);
 
-  PerceptronModel input1(int? input1);
+  PerceptronModel input1(int input1);
 
-  PerceptronModel input2(int? input2);
+  PerceptronModel input2(int input2);
 
   PerceptronModel learningRate(double learningRate);
 
@@ -54,10 +54,10 @@ class _$PerceptronModelCWProxyImpl implements _$PerceptronModelCWProxy {
   PerceptronModel id(int id) => this(id: id);
 
   @override
-  PerceptronModel input1(int? input1) => this(input1: input1);
+  PerceptronModel input1(int input1) => this(input1: input1);
 
   @override
-  PerceptronModel input2(int? input2) => this(input2: input2);
+  PerceptronModel input2(int input2) => this(input2: input2);
 
   @override
   PerceptronModel learningRate(double learningRate) =>
@@ -99,14 +99,14 @@ class _$PerceptronModelCWProxyImpl implements _$PerceptronModelCWProxy {
           ? _value.id
           // ignore: cast_nullable_to_non_nullable
           : id as int,
-      input1: input1 == const $CopyWithPlaceholder()
+      input1: input1 == const $CopyWithPlaceholder() || input1 == null
           ? _value.input1
           // ignore: cast_nullable_to_non_nullable
-          : input1 as int?,
-      input2: input2 == const $CopyWithPlaceholder()
+          : input1 as int,
+      input2: input2 == const $CopyWithPlaceholder() || input2 == null
           ? _value.input2
           // ignore: cast_nullable_to_non_nullable
-          : input2 as int?,
+          : input2 as int,
       learningRate:
           learningRate == const $CopyWithPlaceholder() || learningRate == null
               ? _value.learningRate
@@ -145,8 +145,8 @@ PerceptronModel _$PerceptronModelFromJson(Map<String, dynamic> json) =>
       w1: (json['w1'] as num).toDouble(),
       epoches: json['epoches'] as int,
       learningRate: (json['learning_rate'] as num).toDouble(),
-      input1: json['input1'] as int?,
-      input2: json['input2'] as int?,
+      input1: json['input1'] as int,
+      input2: json['input2'] as int,
       output: json['output'] as int?,
     );
 

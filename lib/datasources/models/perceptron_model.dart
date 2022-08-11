@@ -12,8 +12,8 @@ class PerceptronModel {
     required this.w1,
     required this.epoches,
     required this.learningRate,
-    this.input1,
-    this.input2,
+    required this.input1,
+    required this.input2,
     this.output,
   });
 
@@ -22,8 +22,8 @@ class PerceptronModel {
   final double w0;
   final double w1;
 
-  final int? input1;
-  final int? input2;
+  final int input1;
+  final int input2;
 
   final int epoches;
 

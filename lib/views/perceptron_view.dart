@@ -46,6 +46,12 @@ class PerceptronView extends StatelessWidget {
               OffsetPositioned(
                 offset: input1Offset,
                 child: SwitchInputNeuron(
+                  onIncrease: () {
+                    if (entity.perceptron.input1 == 0) entity.setInput1(1);
+                  },
+                  onDecrease: () {
+                    if (entity.perceptron.input1 == 1) entity.setInput1(0);
+                  },
                   diameter: _neuronDiameter,
                   value:
                       double.tryParse(entity.perceptron.input1.toString()) ?? 0,
@@ -54,6 +60,12 @@ class PerceptronView extends StatelessWidget {
               OffsetPositioned(
                 offset: input2Offset,
                 child: SwitchInputNeuron(
+                  onIncrease: () {
+                    if (entity.perceptron.input2 == 0) entity.setInput2(1);
+                  },
+                  onDecrease: () {
+                    if (entity.perceptron.input2 == 1) entity.setInput2(0);
+                  },
                   diameter: _neuronDiameter,
                   value:
                       double.tryParse(entity.perceptron.input2.toString()) ?? 0,
@@ -65,7 +77,7 @@ class PerceptronView extends StatelessWidget {
                   diameter: _neuronDiameter,
                   child: Text(
                     entity.perceptron.output == null
-                        ? Texts.tryOrLearn
+                        ? Texts.tryOrTrain
                         : entity.perceptron.output.toString(),
                   ),
                 ),

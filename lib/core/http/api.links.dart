@@ -4,4 +4,7 @@ class ApiLinks {
   static const url = 'http://127.0.0.1:8000/';
 
   static const perceptron = '${url}perceptron/';
+  static const tryPerceptron = '${url}perceptron/try';
+  static const trainPerceptron = '${url}perceptron/train';
+  static const resetPerceptron = '${url}perceptron/reset';
 }

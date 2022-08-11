@@ -1,7 +1,5 @@
 import 'package:aigames_flutter/core/di/di.dart';
 import 'package:aigames_flutter/core/style/texts.dart';
-import 'package:aigames_flutter/core/widgets/text_fields/non_empty_text_field.dart';
-import 'package:aigames_flutter/entities/entity.dart';
 import 'package:aigames_flutter/entities/perceptron_entity.dart';
 import 'package:aigames_flutter/views/perceptron_view.dart';
 import 'package:flutter/material.dart';
@@ -17,11 +15,20 @@ class PerceptronPage extends StatefulWidget {
 }
 
 class _PerceptronPageState extends State<PerceptronPage> {
+  final learnRateController = TextEditingController();
+  final epochesController = TextEditingController();
+
   @override
   void initState() {
+    _initPerceptron();
     super.initState();
+  }
 
-    Di.perceptron.getPerceptron();
+  Future<void> _initPerceptron() async {
+    final perceptron = Di.perceptron;
+    await perceptron.getPerceptron();
+    learnRateController.text = perceptron.perceptron.learningRate.toString();
+    epochesController.text = perceptron.perceptron.epoches.toString();
   }
 
   @override
@@ -36,17 +43,42 @@ class _PerceptronPageState extends State<PerceptronPage> {
               children: [
                 const SizedBox(height: 30.0),
                 _buildHeaderedTextField(
-                  Texts.learningRate,
-                  entity.perceptron.learningRate.toString(),
-                  (v) {
-                    print(v);
+                  header: Texts.learningRate,
+                  controller: learnRateController,
+                  initialValue: entity.perceptron.learningRate.toString(),
+                  onChanged: (v) {
+                    double? value = double.tryParse(v);
+
+                    if (value == null) {
+                      value ??= 0.0;
+                      learnRateController.text = value.toString();
+                      learnRateController.selection =
+                          TextSelection.fromPosition(
+                        TextPosition(offset: learnRateController.text.length),
+                      );
+                    }
+
+                    entity.setLearningRate(value);
                   },
                 ),
                 const SizedBox(height: 20.0),
                 _buildHeaderedTextField(
-                  Texts.epoches,
-                  entity.perceptron.epoches.toString(),
-                  (v) {},
+                  header: Texts.epoches,
+                  controller: epochesController,
+                  initialValue: entity.perceptron.epoches.toString(),
+                  onChanged: (v) {
+                    int? value = int.tryParse(v);
+
+                    if (value == null) {
+                      value ??= 1;
+                      epochesController.text = value.toString();
+                      epochesController.selection = TextSelection.fromPosition(
+                        TextPosition(offset: epochesController.text.length),
+                      );
+                    }
+
+                    entity.setEpoches(value);
+                  },
                 ),
                 const SizedBox(height: 30.0),
                 Container(
@@ -57,14 +89,41 @@ class _PerceptronPageState extends State<PerceptronPage> {
                   child: const PerceptronView(),
                 ),
                 const SizedBox(height: 30.0),
-                SizedBox(
-                  width: 120,
-                  height: 40.0,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: const Text(Texts.tryRequest),
-                  ),
-                )
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 120,
+                      height: 40.0,
+                      child: ElevatedButton(
+                        onPressed: entity.tryPerceptron,
+                        child: const Text(Texts.tryRequest),
+                      ),
+                    ),
+                    const SizedBox(width: 30.0),
+                    SizedBox(
+                      width: 120,
+                      height: 40.0,
+                      child: ElevatedButton(
+                        onPressed: entity.trainPerceptron,
+                        child: const Text(Texts.train),
+                      ),
+                    ),
+                    const SizedBox(width: 30.0),
+                    SizedBox(
+                      width: 120,
+                      height: 40.0,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          epochesController.text = '1';
+                          learnRateController.text = '0.1';
+                          entity.resetPerceptron();
+                        },
+                        child: const Text(Texts.reset),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             );
           },
@@ -73,11 +132,12 @@ class _PerceptronPageState extends State<PerceptronPage> {
     );
   }
 
-  Widget _buildHeaderedTextField(
-    String header,
-    String initialValue,
-    Function(String) onChanged,
-  ) {
+  Widget _buildHeaderedTextField({
+    required String header,
+    required String initialValue,
+    required Function(String) onChanged,
+    required TextEditingController controller,
+  }) {
     return SizedBox(
       width: 200.0,
       child: Row(
@@ -103,12 +163,12 @@ class _PerceptronPageState extends State<PerceptronPage> {
                 ),
               ],
             ),
-            child: NonEmptyTextField(
-              initialValue: initialValue,
+            child: TextField(
+              controller: controller,
+              textAlign: TextAlign.center,
+              decoration: const InputDecoration(border: InputBorder.none),
               inputFormatters: [
-                FilteringTextInputFormatter.allow(
-                  RegExp(r'(^\d*\.?\d*)'),
-                )
+                FilteringTextInputFormatter.allow(RegExp(r'(^\d*\.?\d*)'))
               ],
               onChanged: onChanged,
             ),
