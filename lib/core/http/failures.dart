@@ -6,3 +6,10 @@ class ServerFailure extends Failure {
     super.code,
   });
 }
+
+class LocalFailure extends Failure {
+  LocalFailure({
+    required super.message,
+    super.code,
+  });
+}

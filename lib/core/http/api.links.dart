@@ -7,4 +7,7 @@ class ApiLinks {
   static const tryPerceptron = '${url}perceptron/try';
   static const trainPerceptron = '${url}perceptron/train';
   static const resetPerceptron = '${url}perceptron/reset';
+  static const initGradientDescent2d = '${url}gradient_descent_2d/';
+  static const gradientDescent2dMathExpression =
+      '${url}gradient_descent_2d/math_expression';
 }

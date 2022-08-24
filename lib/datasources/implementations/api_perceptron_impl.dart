@@ -1,6 +1,6 @@
 import 'package:aigames_flutter/core/http/api.links.dart';
 import 'package:aigames_flutter/core/http/failure.dart';
-import 'package:aigames_flutter/core/http/server_failure.dart';
+import 'package:aigames_flutter/core/http/failures.dart';
 import 'package:aigames_flutter/datasources/interfaces/perceptron_datasource.dart';
 import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';

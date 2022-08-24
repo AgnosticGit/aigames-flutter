@@ -53,7 +53,6 @@ class PerceptronEntity extends Entity {
 
       if (leftOrRight.isRight()) {
         perceptron = leftOrRight.getRight().toNullable()!;
-        print(perceptron);
         update();
       } else {
         final failure = leftOrRight.getLeft().toNullable();

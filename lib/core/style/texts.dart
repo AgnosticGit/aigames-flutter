@@ -9,4 +9,11 @@ class Texts {
   static const tryOrTrain = 'Try or Train';
   static const train = 'Train';
   static const reset = 'Reset';
+  static const gradientDescent = 'Gradient Descent';
+  static const fOfX = 'F(x) = ';
+  static const buildGraph = 'Build a Graph';
+  static const incorrectMathExpressionWithExample =
+      'Incorrect math expression. Example: (x^2)/3';
+
+  static const enterExpressionHint = 'Enter expression. Example: (x^2)/3';
 }
