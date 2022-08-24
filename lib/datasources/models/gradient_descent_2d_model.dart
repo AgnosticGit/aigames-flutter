@@ -10,14 +10,18 @@ part 'gradient_descent_2d_model.g.dart';
 @CopyWith()
 class GradientDescent2dModel {
   GradientDescent2dModel({
-    this.initialPointX,
+    this.pointX,
+    this.pointY,
     this.delta,
     this.mathExpression,
     this.points,
   });
 
-  @JsonKey(name: 'initial_point_x')
-  final double? initialPointX;
+  @JsonKey(name: 'point_x')
+  final double? pointX;
+
+  @JsonKey(name: 'point_y')
+  final double? pointY;
 
   final Map<String, dynamic>? points;
 

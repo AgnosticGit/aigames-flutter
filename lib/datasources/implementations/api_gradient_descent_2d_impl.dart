@@ -38,4 +38,33 @@ class ApiGradientDescent2dImpl implements GradientDescent2dDatasource {
       return Left(ServerFailure(message: error.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, GradientDescent2dModel>> setX(double x) async {
+    try {
+      final response = await Dio().post(
+        ApiLinks.gradientDescent2dPointX,
+        data: {'point_x': x},
+      );
+
+      final Map<String, dynamic> json = response.data['data'];
+
+      return Right(GradientDescent2dModel.fromJson(json));
+    } on DioError catch (error) {
+      return Left(ServerFailure(message: error.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, GradientDescent2dModel>> descent() async {
+    try {
+      final response = await Dio().get(ApiLinks.gradientDescent2dDescent);
+
+      final Map<String, dynamic> json = response.data['data'];
+
+      return Right(GradientDescent2dModel.fromJson(json));
+    } on DioError catch (error) {
+      return Left(ServerFailure(message: error.toString()));
+    }
+  }
 }

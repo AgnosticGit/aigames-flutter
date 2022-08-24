@@ -9,9 +9,11 @@ part of 'gradient_descent_2d_model.dart';
 abstract class _$GradientDescent2dModelCWProxy {
   GradientDescent2dModel delta(double? delta);
 
-  GradientDescent2dModel initialPointX(double? initialPointX);
-
   GradientDescent2dModel mathExpression(String? mathExpression);
+
+  GradientDescent2dModel pointX(double? pointX);
+
+  GradientDescent2dModel pointY(double? pointY);
 
   GradientDescent2dModel points(Map<String, dynamic>? points);
 
@@ -23,8 +25,9 @@ abstract class _$GradientDescent2dModelCWProxy {
   /// ````
   GradientDescent2dModel call({
     double? delta,
-    double? initialPointX,
     String? mathExpression,
+    double? pointX,
+    double? pointY,
     Map<String, dynamic>? points,
   });
 }
@@ -40,12 +43,14 @@ class _$GradientDescent2dModelCWProxyImpl
   GradientDescent2dModel delta(double? delta) => this(delta: delta);
 
   @override
-  GradientDescent2dModel initialPointX(double? initialPointX) =>
-      this(initialPointX: initialPointX);
-
-  @override
   GradientDescent2dModel mathExpression(String? mathExpression) =>
       this(mathExpression: mathExpression);
+
+  @override
+  GradientDescent2dModel pointX(double? pointX) => this(pointX: pointX);
+
+  @override
+  GradientDescent2dModel pointY(double? pointY) => this(pointY: pointY);
 
   @override
   GradientDescent2dModel points(Map<String, dynamic>? points) =>
@@ -61,8 +66,9 @@ class _$GradientDescent2dModelCWProxyImpl
   /// ````
   GradientDescent2dModel call({
     Object? delta = const $CopyWithPlaceholder(),
-    Object? initialPointX = const $CopyWithPlaceholder(),
     Object? mathExpression = const $CopyWithPlaceholder(),
+    Object? pointX = const $CopyWithPlaceholder(),
+    Object? pointY = const $CopyWithPlaceholder(),
     Object? points = const $CopyWithPlaceholder(),
   }) {
     return GradientDescent2dModel(
@@ -70,14 +76,18 @@ class _$GradientDescent2dModelCWProxyImpl
           ? _value.delta
           // ignore: cast_nullable_to_non_nullable
           : delta as double?,
-      initialPointX: initialPointX == const $CopyWithPlaceholder()
-          ? _value.initialPointX
-          // ignore: cast_nullable_to_non_nullable
-          : initialPointX as double?,
       mathExpression: mathExpression == const $CopyWithPlaceholder()
           ? _value.mathExpression
           // ignore: cast_nullable_to_non_nullable
           : mathExpression as String?,
+      pointX: pointX == const $CopyWithPlaceholder()
+          ? _value.pointX
+          // ignore: cast_nullable_to_non_nullable
+          : pointX as double?,
+      pointY: pointY == const $CopyWithPlaceholder()
+          ? _value.pointY
+          // ignore: cast_nullable_to_non_nullable
+          : pointY as double?,
       points: points == const $CopyWithPlaceholder()
           ? _value.points
           // ignore: cast_nullable_to_non_nullable
@@ -100,7 +110,8 @@ extension $GradientDescent2dModelCopyWith on GradientDescent2dModel {
 GradientDescent2dModel _$GradientDescent2dModelFromJson(
         Map<String, dynamic> json) =>
     GradientDescent2dModel(
-      initialPointX: (json['initial_point_x'] as num?)?.toDouble(),
+      pointX: (json['point_x'] as num?)?.toDouble(),
+      pointY: (json['point_y'] as num?)?.toDouble(),
       delta: (json['delta'] as num?)?.toDouble(),
       mathExpression: json['math_expression'] as String?,
       points: json['points'] as Map<String, dynamic>?,
@@ -109,7 +120,8 @@ GradientDescent2dModel _$GradientDescent2dModelFromJson(
 Map<String, dynamic> _$GradientDescent2dModelToJson(
         GradientDescent2dModel instance) =>
     <String, dynamic>{
-      'initial_point_x': instance.initialPointX,
+      'point_x': instance.pointX,
+      'point_y': instance.pointY,
       'points': instance.points,
       'math_expression': instance.mathExpression,
       'delta': instance.delta,

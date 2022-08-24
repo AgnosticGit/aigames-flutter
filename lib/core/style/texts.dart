@@ -15,5 +15,9 @@ class Texts {
   static const incorrectMathExpressionWithExample =
       'Incorrect math expression. Example: (x^2)/3';
 
-  static const enterExpressionHint = 'Enter expression. Example: (x^2)/3';
+  static const enterExpressionHint = 'Enter expression';
+  static const setXHint = 'Enter X: From -10 to 10';
+  static const setX = 'Set X';
+  static const incorrectPointX = 'Point X must be from -10 to 10';
+  static const descent = 'Descent';
 }

@@ -9,4 +9,8 @@ abstract class GradientDescent2dDatasource {
   Future<Either<Failure, GradientDescent2dModel>> setMathExpression(
     String expression,
   );
+
+  Future<Either<Failure, GradientDescent2dModel>> setX(double x);
+
+  Future<Either<Failure, GradientDescent2dModel>> descent();
 }

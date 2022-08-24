@@ -18,13 +18,17 @@ class GradientDescent2dEntity extends Entity {
     update();
   }
 
+  void onEnterPointX(String x) {
+    model = model.copyWith(pointX: double.tryParse(x));
+    update();
+  }
+
   Future<void> initGradientDescent() async {
     if (datasource != null) {
       final leftOrRight = await datasource!.initGradientDescent();
 
       if (leftOrRight.isRight()) {
         model = leftOrRight.getRight().toNullable()!;
-        print(model);
         setFailure(null);
       } else {
         final failure = leftOrRight.getLeft().toNullable();
@@ -41,7 +45,6 @@ class GradientDescent2dEntity extends Entity {
 
         if (leftOrRight.isRight()) {
           model = leftOrRight.getRight().toNullable()!;
-          print(model);
           setFailure(null);
         } else {
           final failure = leftOrRight.getLeft().toNullable();
@@ -51,6 +54,39 @@ class GradientDescent2dEntity extends Entity {
         setFailure(
           LocalFailure(message: Texts.incorrectMathExpressionWithExample),
         );
+      }
+    }
+  }
+
+  Future<void> setPointX() async {
+    if (datasource != null) {
+      if (model.pointX != null && model.pointX! >= -10 && model.pointX! <= 10) {
+        final leftOrRight = await datasource!.setX(model.pointX!);
+
+        if (leftOrRight.isRight()) {
+          model = leftOrRight.getRight().toNullable()!;
+          setFailure(null);
+        } else {
+          final failure = leftOrRight.getLeft().toNullable();
+          setFailure(failure);
+        }
+      } else {
+        setFailure(LocalFailure(message: Texts.incorrectPointX));
+      }
+    }
+  }
+
+  Future<void> descent() async {
+    if (datasource != null) {
+      final leftOrRight = await datasource!.descent();
+
+      if (leftOrRight.isRight()) {
+        model = leftOrRight.getRight().toNullable()!;
+        print(model);
+        setFailure(null);
+      } else {
+        final failure = leftOrRight.getLeft().toNullable();
+        setFailure(failure);
       }
     }
   }
